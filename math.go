@@ -12,3 +12,6 @@ func Add(i Inputs) int {
 func Subtract(i Inputs) int {
 	return i.InputA - i.InputB
 }
+func Multiply(i Inputs) int {
+	return i.InputA * i.InputB
+}

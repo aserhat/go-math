@@ -56,3 +56,33 @@ func TestSubtract(t *testing.T) {
 		})
 	}
 }
+
+func TestMultiply(t *testing.T) {
+	type args struct {
+		i Inputs
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "Multiply Numbers",
+			args: args{i: Inputs{InputA: 4, InputB: 3}},
+			want: 12,
+		},
+		{
+			name: "Multiply Numbers",
+			args: args{i: Inputs{InputA: 3, InputB: 5}},
+			want: 15,
+		},
+	}
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Multiply(tt.args.i); got != tt.want {
+				t.Errorf("Add() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
