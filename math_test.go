@@ -6,6 +6,7 @@ func TestAdd(t *testing.T) {
 	type args struct {
 		i Inputs
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -19,6 +20,7 @@ func TestAdd(t *testing.T) {
 	}
 	for _, tt := range tests {
 		tt := tt
+
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Add(tt.args.i); got != tt.want {
 				t.Errorf("Add() = %v, want %v", got, tt.want)
@@ -31,6 +33,7 @@ func TestSubtract(t *testing.T) {
 	type args struct {
 		i Inputs
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -49,6 +52,7 @@ func TestSubtract(t *testing.T) {
 	}
 	for _, tt := range tests {
 		tt := tt
+
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Subtract(tt.args.i); got != tt.want {
 				t.Errorf("Subtract() = %v, want %v", got, tt.want)
@@ -61,6 +65,7 @@ func TestMultiply(t *testing.T) {
 	type args struct {
 		i Inputs
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -79,6 +84,7 @@ func TestMultiply(t *testing.T) {
 	}
 	for _, tt := range tests {
 		tt := tt
+
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Multiply(tt.args.i); got != tt.want {
 				t.Errorf("Multiply() = %v, want %v", got, tt.want)
@@ -91,6 +97,7 @@ func TestDivide(t *testing.T) {
 	type args struct {
 		i Inputs
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -106,9 +113,15 @@ func TestDivide(t *testing.T) {
 			args: args{i: Inputs{InputA: 15, InputB: 5}},
 			want: 3,
 		},
+		{
+			name: "Divide Numbers",
+			args: args{i: Inputs{InputA: 20, InputB: 5}},
+			want: 4,
+		},
 	}
 	for _, tt := range tests {
 		tt := tt
+
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Divide(tt.args.i); got != tt.want {
 				t.Errorf("Divide() = %v, want %v", got, tt.want)
