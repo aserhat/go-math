@@ -1,64 +1,85 @@
-run:
-    timeout: 5m
-  
-    build-tags:
-      - e2e
-      - performance
-      - probe
-      - preupgrade
-      - postupgrade
-      - postdowngrade
-      - istio
-  
-    skip-dirs:
-      - pkg/client
-  
-    skip-files:
-      - ".pb.go$"
+ 
+---
+  linters-settings:
+    dupl:
+      threshold: 100
+    funlen:
+      lines: 100
+      statements: 50
+    goconst:
+      min-len: 2
+      min-occurrences: 2
+    gocritic:
+      enabled-tags:
+        - diagnostic
+        - experimental
+        - opinionated
+        - performance
+        - style
+      disabled-checks:
+    gocyclo:
+      min-complexity: 15
+    golint:
+      min-confidence: 0.8
+    govet:
+      check-shadowing: true
+    lll:
+      line-length: 140
+    maligned:
+      suggest-new: true
+    misspell:
+      locale: US
   
   linters:
+    disable-all: true
     enable:
-      - asciicheck
-      - errorlint
+      - bodyclose
+      - deadcode
+      - depguard
+      - dogsled
+      - dupl
+      - errcheck
+      - funlen
+      - gochecknoglobals
+      - gochecknoinits
+      - gocognit
+      - goconst
+      - gocritic
+      - gocyclo
+      - godox
+      - gofmt
+      - goimports
       - golint
+      #- gomnd
+      - goprintffuncname
       - gosec
+      - gosimple
+      - govet
+      - ineffassign
+      - interfacer
+      - lll
+      - maligned
+      - misspell
+      - nakedret
       - prealloc
+      - rowserrcheck
+      - scopelint
+      - staticcheck
+      - structcheck
       - stylecheck
-      - tparallel
+      - typecheck
       - unconvert
       - unparam
-    disable:
-      - errcheck
+      - unused
+      - varcheck
+      - whitespace
+      - wsl
+  
+  run:
+    timeout: 5m
+    skip-dirs:
+      - .github
   
   issues:
-    include:
-      # Disable excluding issues about comments from golint.
-      - EXC0002
-  
-    exclude-rules:
-      - path: test # Excludes /test, *_test.go etc.
-        linters:
-          - gosec
-          - unparam
-  
-      # Ignore "context.Context should be the first parameter of a function" errors in tests.
-      # See: https://github.com/golang/lint/issues/422
-      - path: test
-        text: "context.Context should be the first"
-        linters:
-          - golint
-  
-      # Allow source and sink receivers in conversion code for clarity.
-      - path: _conversion\.go
-        text: "ST1016:"
-        linters:
-          - stylecheck
-      - path: _conversion\.go
-        text: "receiver name"
-        linters:
-          - golint
-  
-      # This check has quite a few false positives where there isn't much value in the package comment.
-      - text: "ST1000: at least one file in a package should have a package comment"
-        linters:
-          - stylecheck
+    max-same-issues: 0
+    exclude-use-default: false
