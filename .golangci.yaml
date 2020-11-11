@@ -50,7 +50,6 @@
       - gofmt
       - goimports
       - golint
-      #- gomnd
       - goprintffuncname
       - gosec
       - gosimple

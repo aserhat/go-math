@@ -1,130 +1,162 @@
 package math
 
-import "testing"
+import (
+	"testing"
+)
 
-func TestAdd(t *testing.T) {
-	type args struct {
-		i Inputs
+func TestInputs_Add(t *testing.T) {
+	type fields struct {
+		InputA int
+		InputB int
 	}
 
 	tests := []struct {
-		name string
-		args args
-		want int
+		name   string
+		fields fields
+		want   int
 	}{
 		{
-			name: "Add Numbers",
-			args: args{i: Inputs{InputA: 3, InputB: 3}},
-			want: 6,
+			name:   "Add Numbers",
+			fields: fields{InputA: 3, InputB: 3},
+			want:   6,
+		},
+		{
+			name:   "Add Numbers",
+			fields: fields{InputA: 7, InputB: 25},
+			want:   32,
+		},
+		{
+			name:   "Add Numbers",
+			fields: fields{InputA: 39, InputB: 3},
+			want:   42,
+		},
+		{
+			name:   "Add Numbers",
+			fields: fields{InputA: 1, InputB: 2},
+			want:   3,
 		},
 	}
 	for _, tt := range tests {
 		tt := tt
 
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Add(tt.args.i); got != tt.want {
-				t.Errorf("Add() = %v, want %v", got, tt.want)
+			i := Inputs{
+				InputA: tt.fields.InputA,
+				InputB: tt.fields.InputB,
+			}
+			if got := i.Add(); got != tt.want {
+				t.Errorf("Inputs.Add() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func TestSubtract(t *testing.T) {
-	type args struct {
-		i Inputs
+func TestInputs_Subtract(t *testing.T) {
+	type fields struct {
+		InputA int
+		InputB int
 	}
 
 	tests := []struct {
-		name string
-		args args
-		want int
+		name   string
+		fields fields
+		want   int
 	}{
 		{
-			name: "Subtract Numbers",
-			args: args{i: Inputs{InputA: 4, InputB: 3}},
-			want: 1,
+			name:   "Subtract Numbers",
+			fields: fields{InputA: 10, InputB: 3},
+			want:   7,
 		},
 		{
-			name: "Subtract Numbers",
-			args: args{i: Inputs{InputA: 3, InputB: 4}},
-			want: -1,
+			name:   "Subtract Numbers",
+			fields: fields{InputA: 25, InputB: 40},
+			want:   -15,
 		},
 	}
 	for _, tt := range tests {
 		tt := tt
 
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Subtract(tt.args.i); got != tt.want {
-				t.Errorf("Subtract() = %v, want %v", got, tt.want)
+			i := Inputs{
+				InputA: tt.fields.InputA,
+				InputB: tt.fields.InputB,
+			}
+			if got := i.Subtract(); got != tt.want {
+				t.Errorf("Inputs.Subtract() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func TestMultiply(t *testing.T) {
-	type args struct {
-		i Inputs
+func TestInputs_Multiply(t *testing.T) {
+	type fields struct {
+		InputA int
+		InputB int
 	}
 
 	tests := []struct {
-		name string
-		args args
-		want int
+		name   string
+		fields fields
+		want   int
 	}{
 		{
-			name: "Multiply Numbers",
-			args: args{i: Inputs{InputA: 4, InputB: 3}},
-			want: 12,
+			name:   "Multiply Numbers",
+			fields: fields{InputA: 10, InputB: 3},
+			want:   30,
 		},
 		{
-			name: "Multiply Numbers",
-			args: args{i: Inputs{InputA: 3, InputB: 5}},
-			want: 15,
+			name:   "Multiply Numbers",
+			fields: fields{InputA: 25, InputB: 3},
+			want:   75,
+		},
+		{
+			name:   "Multiply Numbers",
+			fields: fields{InputA: 9, InputB: 3},
+			want:   27,
 		},
 	}
 	for _, tt := range tests {
 		tt := tt
 
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Multiply(tt.args.i); got != tt.want {
-				t.Errorf("Multiply() = %v, want %v", got, tt.want)
+			i := Inputs{
+				InputA: tt.fields.InputA,
+				InputB: tt.fields.InputB,
+			}
+			if got := i.Multiply(); got != tt.want {
+				t.Errorf("Inputs.Multiply() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func TestDivide(t *testing.T) {
-	type args struct {
-		i Inputs
+func TestInputs_Divide(t *testing.T) {
+	type fields struct {
+		InputA int
+		InputB int
 	}
 
 	tests := []struct {
-		name string
-		args args
-		want int
+		name   string
+		fields fields
+		want   int
 	}{
 		{
-			name: "Divide Numbers",
-			args: args{i: Inputs{InputA: 12, InputB: 3}},
-			want: 4,
-		},
-		{
-			name: "Divide Numbers",
-			args: args{i: Inputs{InputA: 15, InputB: 5}},
-			want: 3,
-		},
-		{
-			name: "Divide Numbers",
-			args: args{i: Inputs{InputA: 20, InputB: 5}},
-			want: 4,
+			name:   "Divide Numbers",
+			fields: fields{InputA: 30, InputB: 3},
+			want:   10,
 		},
 	}
 	for _, tt := range tests {
 		tt := tt
 
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Divide(tt.args.i); got != tt.want {
-				t.Errorf("Divide() = %v, want %v", got, tt.want)
+			i := Inputs{
+				InputA: tt.fields.InputA,
+				InputB: tt.fields.InputB,
+			}
+			if got := i.Divide(); got != tt.want {
+				t.Errorf("Inputs.Divide() = %v, want %v", got, tt.want)
 			}
 		})
 	}
