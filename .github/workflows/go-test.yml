@@ -1,4 +1,4 @@
-name: Go Test
+name: Test
 
 on:
   push:
@@ -8,38 +8,8 @@ on:
 
 jobs:
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Set up Go 1.x
-      uses: actions/setup-go@v2
-      with:
-        go-version: ^1.13
-
-    - name: Check out code into the Go module directory
-      uses: actions/checkout@v2
-
-    - name: Check for .codecov.yaml
-      id: codecov-enabled
-      uses: andstor/file-existence-action@v1
-      with:
-        files: .codecov.yaml
-
-    - if: steps.codecov-enabled.outputs.files_exists == 'true'
-      name: Produce Go Coverage
-      run: echo 'COVER_OPTS=-coverprofile=coverage.txt -covermode=atomic' >> $GITHUB_ENV
-
-    - name: Test
-      run: go test -race $COVER_OPTS ./...
-
-    - if: steps.codecov-enabled.outputs.files_exists == 'true'
-      name: Codecov
-      uses: codecov/codecov-action@v1
-
-  lint:
-    name: Lint
+  test:
+    name: Test
     runs-on: ubuntu-latest
 
     steps:
@@ -47,17 +17,23 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.15.x
-        id: go
 
       - name: Check out code
         uses: actions/checkout@v2
 
-      - id: golangci_configuration
+      - name: Check for .codecov.yaml
+        id: codecov-check
         uses: andstor/file-existence-action@v1
         with:
-          files: .golangci.yaml
-      - name: Go Lint
-        if: steps.golangci_configuration.outputs.files_exists == 'true'
-        uses: golangci/golangci-lint-action@v2
-        with:
-          version: v1.32
+          files: .codecov.yaml
+
+      - name: Produce Go Coverage
+        if: steps.codecov-check.outputs.files_exists == 'true'
+        run: echo 'COVER_OPTS=-coverprofile=coverage.txt -covermode=atomic' >> $GITHUB_ENV
+
+      - name: Go Test
+        run: go test -race $COVER_OPTS ./...
+
+      - name: Codecov
+        if: steps.codecov-check.outputs.files_exists == 'true'
+        uses: codecov/codecov-action@v1
