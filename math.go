@@ -15,3 +15,6 @@ func Subtract(i Inputs) int {
 func Multiply(i Inputs) int {
 	return i.InputA * i.InputB
 }
+func Divide(i Inputs) int {
+	return i.InputA / i.InputB
+}
