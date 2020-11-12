@@ -17,8 +17,8 @@ func TestInputs_Add(t *testing.T) {
 	}{
 		{
 			name:   "Add Numbers",
-			fields: fields{InputA: 3, InputB: 3},
-			want:   6,
+			fields: fields{InputA: 4, InputB: 3},
+			want:   7,
 		},
 		{
 			name:   "Add Numbers",
