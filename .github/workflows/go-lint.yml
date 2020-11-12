@@ -21,7 +21,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Check for .golangci.yml
+      - name: Check for .golangci.yml file
         id: golangci-check
         uses: andstor/file-existence-action@v1
         with:

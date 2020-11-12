@@ -1,4 +1,4 @@
-// Package math provides basic math functions.
+// Package math provides basic math functions for two numbers
 package math
 
 // Inputs stores the the two numbers you want do math on

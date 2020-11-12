@@ -12,6 +12,7 @@ func main() {
 		InputB: 5,
 	}
 
+	fmt.Println("Lets go do some math!")
 	fmt.Println(i.Add())
 	fmt.Println(i.Subtract())
 	fmt.Println(i.Multiply())

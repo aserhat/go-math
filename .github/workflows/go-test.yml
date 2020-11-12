@@ -21,7 +21,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Check for .codecov.yaml
+      - name: Check for .codecov.yaml file
         id: codecov-check
         uses: andstor/file-existence-action@v1
         with:
@@ -34,6 +34,6 @@ jobs:
       - name: Go Test
         run: go test -race $COVER_OPTS ./...
 
-      - name: Codecov
+      - name: Run Codecov
         if: steps.codecov-check.outputs.files_exists == 'true'
         uses: codecov/codecov-action@v1
